@@ -53,8 +53,8 @@ namespace Steering
                 }
             }
 
-            rigidBody.velocity        = stopMoving  ? Vector3.zero : UpdateLinearVelocity(accumulatedLinearAcceleration, threshold);
             rigidBody.angularVelocity = stopTurning ? Vector3.zero : UpdateAngularVelocity(accumulatedAngularAcceleration, threshold);
+            rigidBody.velocity        = stopMoving  ? Vector3.zero : UpdateLinearVelocity(accumulatedLinearAcceleration, threshold);
         }
 
         

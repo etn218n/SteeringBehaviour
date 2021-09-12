@@ -23,14 +23,16 @@ namespace Steering
             var rotationAxis   = Vector3.Cross(currentDirection, targetDirection).normalized;
             var remainingAngle = Vector3.SignedAngle(currentDirection, targetDirection, rotationAxis);
 
-            if (Mathf.Abs(remainingAngle) <= stoppingRadius)
+            remainingAngle = Mathf.Abs(remainingAngle);
+            
+            if (remainingAngle <= stoppingRadius)
                 return null;
 
             stoppingRadius = Mathf.Clamp(stoppingRadius, 1.0f, float.MaxValue);
             slowdownRadius = Mathf.Clamp(slowdownRadius, 1.0f, float.MaxValue);
 
-            var targetAngularSpeed        = Mathf.Abs(remainingAngle) > slowdownRadius ? threshold.MaxAngularSpeed : threshold.MaxAngularSpeed * remainingAngle / slowdownRadius;
-            var targetAngularAcceleration = Mathf.Abs(targetAngularSpeed - currentAngularSpeed * Mathf.Rad2Deg) / Time.fixedDeltaTime;
+            var targetAngularSpeed        = remainingAngle > slowdownRadius ? threshold.MaxAngularSpeed : threshold.MaxAngularSpeed * remainingAngle / slowdownRadius;
+            var targetAngularAcceleration = (targetAngularSpeed - currentAngularSpeed * Mathf.Rad2Deg) / Time.fixedDeltaTime;
 
             return rotationAxis * targetAngularAcceleration * Mathf.Deg2Rad;
         }
