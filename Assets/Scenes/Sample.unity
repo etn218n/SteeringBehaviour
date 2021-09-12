@@ -620,6 +620,7 @@ GameObject:
   - component: {fileID: 1382896885}
   - component: {fileID: 1382896886}
   - component: {fileID: 1382896887}
+  - component: {fileID: 1382896888}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -693,7 +694,7 @@ MonoBehaviour:
     MaxAngularSpeed: 360
     MaxAngularAcceleration: 360
   steeringBehaviours:
-  - {fileID: 1382896886}
+  - {fileID: 1382896888}
   - {fileID: 1382896887}
 --- !u!114 &1382896886
 MonoBehaviour:
@@ -721,9 +722,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  targetRadius: 3
-  slowRadius: 20
-  timeToReachTarget: 0.4
+  stoppingRadius: 2
+  slowdownRadius: 36
+--- !u!114 &1382896888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382896881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389cc6d5b75ed6845973d93b9cdeb9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  stoppingRadius: 0.1
+  slowdownRadius: 2
+  showGizmos: 1
 --- !u!1 &1837437189
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,20 +9,20 @@ namespace Steering
         [Header("Moving")]
         public float MaxLinearSpeed;
         public float MaxLinearAcceleration;
-        
+
         [Header("Turning")]
         public float MaxAngularSpeed;
         public float MaxAngularAcceleration;
 
-        
+
         public Vector3 ClampLinearAcceleration(Vector3 linearAcceleration)
         {
             var clampedMagnitude = Mathf.Clamp(linearAcceleration.magnitude, -MaxLinearAcceleration, MaxLinearAcceleration);
-            
+
             return linearAcceleration.normalized * clampedMagnitude;
         }
-        
-        
+
+
         public Vector3 ClampAngularAcceleration(Vector3 angularAcceleration)
         {
             var clampedMagnitude = Mathf.Clamp(angularAcceleration.magnitude, -MaxAngularAcceleration, MaxAngularAcceleration);

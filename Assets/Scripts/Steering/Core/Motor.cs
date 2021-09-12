@@ -57,6 +57,14 @@ namespace Steering
             rigidBody.angularVelocity = stopTurning ? Vector3.zero : UpdateAngularVelocity(accumulatedAngularAcceleration, threshold);
         }
 
+        
+        private Vector3 UpdateLinearVelocity(Vector3 linearAcceleration, SteeringThreshold threshold)
+        {
+            var updatedLinearVelocity = rigidBody.velocity + threshold.ClampLinearAcceleration(linearAcceleration) * Time.fixedDeltaTime;
+            
+            return threshold.ClampVelocity(updatedLinearVelocity);
+        }
+        
 
         private Vector3 UpdateAngularVelocity(Vector3 angularAcceleration, SteeringThreshold threshold)
         {
@@ -65,14 +73,6 @@ namespace Steering
             return threshold.ClampRotation(updatedAngularVelocity);
         }
         
-        
-        private Vector3 UpdateLinearVelocity(Vector3 linearAcceleration, SteeringThreshold threshold)
-        {
-            var newLinearVelocity = rigidBody.velocity + threshold.ClampLinearAcceleration(linearAcceleration) * Time.fixedDeltaTime;
-            
-            return threshold.ClampVelocity(newLinearVelocity) ;
-        }
-
 
         public override Kinematic CurrentKinematic
         {

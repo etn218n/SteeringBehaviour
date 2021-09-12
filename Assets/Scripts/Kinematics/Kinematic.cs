@@ -4,7 +4,7 @@ namespace Kinematics
 {
     public class Kinematic
     {
-        public static Kinematic Empty = new Kinematic();
+        public static readonly Kinematic Empty = new Kinematic();
         
         public Vector3 Up;
         public Vector3 Forward;
