@@ -622,6 +622,8 @@ GameObject:
   - component: {fileID: 1382896887}
   - component: {fileID: 1382896888}
   - component: {fileID: 1382896889}
+  - component: {fileID: 1382896890}
+  - component: {fileID: 1382896891}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -691,13 +693,12 @@ MonoBehaviour:
   kinematicCollection: {fileID: 11400000, guid: 98fa127377befa243b0ee558225fffa0, type: 2}
   target: {fileID: 1016449805}
   threshold:
-    MaxLinearSpeed: 3
-    MaxLinearAcceleration: 20
-    MaxAngularSpeed: 120
-    MaxAngularAcceleration: 360
+    MaxLinearSpeed: 1
+    MaxLinearAcceleration: 10
+    MaxAngularSpeed: 60
+    MaxAngularAcceleration: 240
   steeringBehaviours:
-  - {fileID: 1382896887}
-  - {fileID: 1382896889}
+  - {fileID: 1382896891}
 --- !u!114 &1382896886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,7 +742,7 @@ MonoBehaviour:
   weight: 1
   stoppingRadius: 0.1
   slowdownRadius: 2
-  showGizmos: 1
+  showGizmos: 0
 --- !u!114 &1382896889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +756,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
+--- !u!114 &1382896890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382896881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a482178cdc835bc409af9dd90465cc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+--- !u!114 &1382896891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382896881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5895926e38934812b616aebabde32059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  deviation: 0.05
 --- !u!1 &1632354880
 GameObject:
   m_ObjectHideFlags: 0
