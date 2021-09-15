@@ -638,6 +638,7 @@ GameObject:
   - component: {fileID: 1382896889}
   - component: {fileID: 1382896890}
   - component: {fileID: 1382896891}
+  - component: {fileID: 1382896893}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -712,7 +713,7 @@ MonoBehaviour:
     MaxAngularSpeed: 60
     MaxAngularAcceleration: 360
   steeringBehaviours:
-  - {fileID: 1382896888}
+  - {fileID: 1382896891}
 --- !u!114 &1382896886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,8 +740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  stoppingRadius: 1
-  slowdownRadius: 30
+  stoppingAngle: 1
+  slowdownAngle: 10
 --- !u!114 &1382896888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,10 +755,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  stoppingPositionalRadius: 0.1
-  slowdownPositionalRadius: 1
-  stoppingAngularRadius: 1
-  slowdownAngularRadius: 10
+  stoppingRadius: 0.1
+  slowdownRadius: 1
+  stoppingAngle: 1
+  slowdownAngle: 10
   showGizmos: 0
 --- !u!114 &1382896889
 MonoBehaviour:
@@ -812,8 +813,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  stoppingRadius: 1
-  slowdownRadius: 30
+  stoppingAngle: 1
+  slowdownAngle: 10
+--- !u!114 &1382896893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382896881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331aeed09db34dfeb3461bd9a4b5279b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  stoppingRadius: 0.1
+  slowdownRadius: 1
+  showGizmos: 0
 --- !u!1 &1632354880
 GameObject:
   m_ObjectHideFlags: 0
