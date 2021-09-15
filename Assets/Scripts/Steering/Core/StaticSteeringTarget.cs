@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Steering
 {
-    public class SteeringTarget : KinematicEntity
+    public class StaticSteeringTarget : KinematicEntity
     {
         public override ref readonly Kinematic CurrentKinematic
         {

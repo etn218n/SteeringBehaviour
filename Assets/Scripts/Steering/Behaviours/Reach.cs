@@ -6,11 +6,11 @@ namespace Steering
     public class Reach : SteeringBehaviour
     {
         [Header("Reaching Destination")]
-        [SerializeField] protected float stoppingRadius = 0.1f;
-        [SerializeField] protected float slowdownRadius = 1.0f;
+        [SerializeField] private float stoppingRadius = 0.1f;
+        [SerializeField] private float slowdownRadius = 1.0f;
 
         [Header("Debug")]
-        [SerializeField] protected bool showGizmos;
+        [SerializeField] private bool showGizmos;
         
         protected Vector3 debugTargetPosition;
 

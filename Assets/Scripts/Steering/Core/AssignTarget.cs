@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Steering
 {
-    public class AssignSteeringTarget : MonoBehaviour
+    public class AssignTarget : MonoBehaviour
     {
         [SerializeField] private Transform targetToMove;
     

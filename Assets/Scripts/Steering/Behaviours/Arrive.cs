@@ -6,15 +6,15 @@ namespace Steering
     public class Arrive : SteeringBehaviour
     {
         [Header("Reaching Destination")]
-        [SerializeField] protected float stoppingRadius = 0.1f;
-        [SerializeField] protected float slowdownRadius = 1.0f;
+        [SerializeField] private float stoppingRadius = 0.1f;
+        [SerializeField] private float slowdownRadius = 1.0f;
         
         [Header("Reaching Angle")]
-        [SerializeField] protected float stoppingAngle = 1f;
-        [SerializeField] protected float slowdownAngle = 10f;
+        [SerializeField] private float stoppingAngle = 1f;
+        [SerializeField] private float slowdownAngle = 10f;
 
         [Header("Debug")]
-        [SerializeField] protected bool showGizmos;
+        [SerializeField] private bool showGizmos;
         
         protected Vector3 debugTargetPosition;
 
