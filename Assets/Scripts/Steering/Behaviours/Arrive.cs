@@ -6,8 +6,12 @@ namespace Steering
     public class Arrive : SteeringBehaviour
     {
         [Header("Reaching Destination")]
-        [SerializeField] protected float stoppingRadius = 0.1f;
-        [SerializeField] protected float slowdownRadius = 1.0f;
+        [SerializeField] protected float stoppingPositionalRadius = 0.1f;
+        [SerializeField] protected float slowdownPositionalRadius = 1.0f;
+        
+        [Header("Reaching Angle")]
+        [SerializeField] protected float stoppingAngularRadius = 1f;
+        [SerializeField] protected float slowdownAngularRadius = 10f;
 
         [Header("Debug")]
         [SerializeField] protected bool showGizmos;
@@ -20,12 +24,14 @@ namespace Steering
 
         public override SteeringOutput Steer(Kinematic current, Kinematic target, SteeringThreshold threshold)
         {
-            var moveDirection      = (target.Position - current.Position).normalized;
-            var linearAcceleration = CalculateLinearAcceleration(moveDirection, current, target, threshold);
+            var moveDirection       = (target.Position - current.Position).normalized;
+
+            var linearAcceleration  = CalculateLinearAcceleration(current.Forward, current, target, threshold);
+            var angularAcceleration = CalculateAngularAcceleration(current.Forward, moveDirection, current.AngularVelocity.magnitude, threshold);
             
             debugTargetPosition = target.Position;
 
-            return new SteeringOutput(linearAcceleration, null);
+            return new SteeringOutput(linearAcceleration, angularAcceleration);
         }
         
 
@@ -35,20 +41,40 @@ namespace Steering
 
             var distanceToTarget = Vector3.Distance(target.Position, current.Position);
 
-            if (distanceToTarget <= stoppingRadius)
+            if (distanceToTarget <= stoppingPositionalRadius)
             {
                 isArrived = true;
                 return null;
             }
 
-            stoppingRadius = Mathf.Clamp(stoppingRadius, 0.1f, float.MaxValue);
-            slowdownRadius = Mathf.Clamp(slowdownRadius, 1.0f, float.MaxValue);
+            stoppingPositionalRadius = Mathf.Clamp(stoppingPositionalRadius, 0.1f, float.MaxValue);
+            slowdownPositionalRadius = Mathf.Clamp(slowdownPositionalRadius, 1.0f, float.MaxValue);
 
-            var targetSpeed        = distanceToTarget > slowdownRadius ? threshold.MaxLinearSpeed : threshold.MaxLinearSpeed * distanceToTarget / slowdownRadius;
+            var targetSpeed        = distanceToTarget > slowdownPositionalRadius ? threshold.MaxLinearSpeed : threshold.MaxLinearSpeed * distanceToTarget / slowdownPositionalRadius;
             var targetVelocity     = targetSpeed * moveDirection;
             var targetAcceleration = (targetVelocity - current.LinearVelocity) / Time.fixedDeltaTime;
 
             return targetAcceleration; 
+        }
+        
+        
+        protected Vector3? CalculateAngularAcceleration(Vector3 currentDirection, Vector3 targetDirection, float currentAngularSpeed, SteeringThreshold threshold)
+        {
+            var rotationAxis   = Vector3.Cross(currentDirection, targetDirection).normalized;
+            var remainingAngle = Vector3.SignedAngle(currentDirection, targetDirection, rotationAxis);
+
+            remainingAngle = Mathf.Abs(remainingAngle);
+            
+            if (remainingAngle <= stoppingAngularRadius)
+                return null;
+
+            stoppingAngularRadius = Mathf.Clamp(stoppingAngularRadius, 1.0f, float.MaxValue);
+            slowdownAngularRadius = Mathf.Clamp(slowdownAngularRadius, 1.0f, float.MaxValue);
+
+            var targetAngularSpeed        = remainingAngle > slowdownAngularRadius ? threshold.MaxAngularSpeed : threshold.MaxAngularSpeed * remainingAngle / slowdownAngularRadius;
+            var targetAngularAcceleration = (targetAngularSpeed - currentAngularSpeed * Mathf.Rad2Deg) / Time.fixedDeltaTime;
+
+            return rotationAxis * targetAngularAcceleration * Mathf.Deg2Rad;
         }
         
 
@@ -57,7 +83,7 @@ namespace Steering
             if (showGizmos)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(debugTargetPosition, slowdownRadius);
+                Gizmos.DrawWireSphere(debugTargetPosition, slowdownPositionalRadius);
             }
         }
     }
