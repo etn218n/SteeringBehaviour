@@ -14,6 +14,6 @@ namespace Steering
             set => weight = value;
         }
         
-        public abstract SteeringOutput Steer(Kinematic current, Kinematic target, SteeringThreshold threshold);
+        public abstract SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold);
     }
 }

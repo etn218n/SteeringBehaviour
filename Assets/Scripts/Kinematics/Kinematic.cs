@@ -2,7 +2,7 @@
 
 namespace Kinematics
 {
-    public class Kinematic
+    public struct Kinematic
     {
         public static readonly Kinematic Empty = new Kinematic();
         

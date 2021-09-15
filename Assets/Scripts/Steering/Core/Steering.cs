@@ -5,7 +5,7 @@ namespace Steering
 {
     public static class Steering
     {
-        public static Vector3? ReachDestination(Kinematic current, Kinematic target, float stoppingRadius, float slowdownRadius, SteeringThreshold threshold)
+        public static Vector3? ReachDestination(in Kinematic current, in Kinematic target, float stoppingRadius, float slowdownRadius, in SteeringThreshold threshold)
         {
             var distanceToTarget = Vector3.Distance(current.Position, target.Position);
             
@@ -23,7 +23,7 @@ namespace Steering
         }
         
         
-        public static Vector3? ReachOrientation(Kinematic current, Kinematic target, float stoppingAngle, float slowdownAngle, SteeringThreshold threshold)
+        public static Vector3? ReachOrientation(in Kinematic current, in Kinematic target, float stoppingAngle, float slowdownAngle, in SteeringThreshold threshold)
         {
             var rotationAxis   = Vector3.Cross(current.Forward, target.Forward).normalized;
             var remainingAngle = Vector3.SignedAngle(current.Forward, target.Forward, rotationAxis);

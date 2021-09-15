@@ -7,7 +7,7 @@ namespace Steering
     [RequireComponent(typeof(Rigidbody))]
     public class Motor : KinematicEntity
     {
-        [SerializeField] private KinematicEntity target;
+        [SerializeField] private KinematicEntity targetEntity;
         [Space]
         [SerializeField] private SteeringThreshold threshold;
         [Space]
@@ -21,14 +21,14 @@ namespace Steering
 
         private void FixedUpdate()
         {
-            var targetKinematic  = (target == null) ? Kinematic.Empty : target.CurrentKinematic;
-            var currentKinematic = CurrentKinematic;
+            var target  = targetEntity == null ? Kinematic.Empty : targetEntity.CurrentKinematic;
+            var current = CurrentKinematic;
 
-            Steer(currentKinematic, targetKinematic, threshold);
+            Actuate(in current, in target, in threshold);
         }
         
 
-        private void Steer(Kinematic currentKinematic, Kinematic targetKinematic, SteeringThreshold threshold)
+        private void Actuate(in Kinematic currentKinematic, in Kinematic targetKinematic, in SteeringThreshold threshold)
         {
             var stopTurning = true;
             var stopMoving  = true;
@@ -38,7 +38,7 @@ namespace Steering
 
             foreach (var behaviour in steeringBehaviours)
             {
-                var steeringOutput = behaviour.Steer(currentKinematic, targetKinematic, threshold);
+                var steeringOutput = behaviour.Steer(in currentKinematic, in targetKinematic, in threshold);
                 
                 if (steeringOutput.HasLinearAcceleration)
                 {
@@ -74,17 +74,19 @@ namespace Steering
         }
         
 
-        public override Kinematic CurrentKinematic
+        public override ref readonly Kinematic CurrentKinematic
         {
-            get => new Kinematic
+            get
             {
-                Up              = -transform.forward,
-                Forward         =  transform.up,
-                Position        =  rigidBody.position,
-                Orientation     =  rigidBody.rotation,
-                LinearVelocity  =  rigidBody.velocity,
-                AngularVelocity =  rigidBody.angularVelocity
-            };
+                currentKinematic.Up              = -transform.forward;
+                currentKinematic.Forward         =  transform.up;
+                currentKinematic.Position        =  rigidBody.position;
+                currentKinematic.Orientation     =  rigidBody.rotation;
+                currentKinematic.LinearVelocity  =  rigidBody.velocity;
+                currentKinematic.AngularVelocity =  rigidBody.angularVelocity;
+                
+                return ref currentKinematic;
+            }
         }
     } 
 }

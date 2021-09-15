@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kinematicCollection: {fileID: 11400000, guid: 98fa127377befa243b0ee558225fffa0, type: 2}
-  target: {fileID: 1016449805}
+  targetEntity: {fileID: 1016449805}
   threshold:
     MaxLinearSpeed: 1
     MaxLinearAcceleration: 10

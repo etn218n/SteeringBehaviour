@@ -19,13 +19,16 @@ namespace Steering
         protected Vector3 debugTargetPosition;
 
 
-        public override SteeringOutput Steer(Kinematic current, Kinematic target, SteeringThreshold threshold)
+        public override SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold)
         {
-            target.Forward = (target.Position - current.Position).normalized;
-            target.LinearVelocity = current.Forward * threshold.MaxLinearSpeed;
+            var linearTarget = target;
+            linearTarget.LinearVelocity = current.Forward * threshold.MaxLinearSpeed;
 
-            var linearAcceleration  = Steering.ReachDestination(current, target, stoppingRadius, slowdownRadius, threshold);
-            var angularAcceleration = Steering.ReachOrientation(current, target, stoppingAngle, slowdownAngle, threshold);
+            var angularTarget = target;
+            angularTarget.Forward = (target.Position - current.Position).normalized;
+
+            var linearAcceleration  = Steering.ReachDestination(current, linearTarget, stoppingRadius, slowdownRadius, threshold);
+            var angularAcceleration = Steering.ReachOrientation(current, angularTarget, stoppingAngle, slowdownAngle, threshold);
             
             debugTargetPosition = target.Position;
 

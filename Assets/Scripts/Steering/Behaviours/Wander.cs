@@ -12,7 +12,7 @@ namespace Steering
         private Vector3 targetDirection;
         
         
-        public override SteeringOutput Steer(Kinematic current, Kinematic target, SteeringThreshold threshold)
+        public override SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold)
         {
             if (targetDirection == Vector3.zero)
                 RandomizeTargetDirection(current.Forward, current.Up);
@@ -20,10 +20,11 @@ namespace Steering
             var stoppingAngle = threshold.MaxAngularSpeed * 0.01f;
             var slowdownAngle = threshold.MaxAngularSpeed * 0.1f;
 
-            target.Forward = targetDirection;
+            var angularTarget = target;
+            angularTarget.Forward = targetDirection;
             
             var linearAcceleration  = current.Forward * threshold.MaxLinearAcceleration;
-            var angularAcceleration = Steering.ReachOrientation(current, target, stoppingAngle, slowdownAngle, threshold);
+            var angularAcceleration = Steering.ReachOrientation(current, angularTarget, stoppingAngle, slowdownAngle, threshold);
 
             if (angularAcceleration == null)
             {

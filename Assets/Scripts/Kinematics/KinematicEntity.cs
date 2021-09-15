@@ -6,8 +6,9 @@ namespace Kinematics
     {
         [Header("Components")]
         [SerializeField] protected KinematicCollection kinematicCollection;
-        
-        public abstract Kinematic CurrentKinematic { get; }
+
+        protected Kinematic currentKinematic;
+        public abstract ref readonly Kinematic CurrentKinematic { get; }
         
         
         protected virtual void OnEnable()

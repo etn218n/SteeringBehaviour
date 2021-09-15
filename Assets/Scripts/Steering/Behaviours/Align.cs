@@ -10,7 +10,7 @@ namespace Steering
         [SerializeField] private float slowdownAngle = 10f;
 
 
-        public override SteeringOutput Steer(Kinematic current, Kinematic target, SteeringThreshold threshold)
+        public override SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold)
         {
             var angularAcceleration = Steering.ReachOrientation(current, target, stoppingAngle, slowdownAngle, threshold);
 
