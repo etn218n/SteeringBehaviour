@@ -709,7 +709,7 @@ MonoBehaviour:
     MaxLinearSpeed: 1
     MaxLinearAcceleration: 10
     MaxAngularSpeed: 60
-    MaxAngularAcceleration: 240
+    MaxAngularAcceleration: 360
   steeringBehaviours:
   - {fileID: 1382896891}
 --- !u!114 &1382896886
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  deviation: 0.05
+  deviation: 60
 --- !u!1 &1632354880
 GameObject:
   m_ObjectHideFlags: 0

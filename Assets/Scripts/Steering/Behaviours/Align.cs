@@ -6,8 +6,8 @@ namespace Steering
     public class Align : SteeringBehaviour
     {
         [Header("Reaching Angle")]
-        [SerializeField] protected float stoppingRadius;
-        [SerializeField] protected float slowdownRadius;
+        [SerializeField] protected float stoppingRadius = 1f;
+        [SerializeField] protected float slowdownRadius = 10f;
 
 
         public override SteeringOutput Steer(Kinematic current, Kinematic target, SteeringThreshold threshold)
