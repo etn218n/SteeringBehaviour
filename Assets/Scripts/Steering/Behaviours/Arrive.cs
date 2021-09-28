@@ -38,11 +38,11 @@ namespace Steering
 
         public void OnDrawGizmos()
         {
-            if (showGizmos)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(debugTargetPosition, slowdownRadius);
-            }
+            if (!showGizmos) 
+                return;
+            
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(debugTargetPosition, slowdownRadius);
         }
     }
 }
