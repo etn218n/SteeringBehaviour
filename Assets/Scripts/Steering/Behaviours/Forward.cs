@@ -7,7 +7,6 @@ namespace Steering
         public override SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold)
         {
             var linearAcceleration = current.Forward * threshold.MaxLinearAcceleration;
-
             return new SteeringOutput(linearAcceleration, null);
         }
     }

@@ -11,7 +11,6 @@ namespace Steering
 
         private Vector3 targetDirection;
         
-        
         public override SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold)
         {
             if (targetDirection == Vector3.zero)
@@ -34,12 +33,10 @@ namespace Steering
 
             return new SteeringOutput(linearAcceleration, angularAcceleration);
         }
-
-
+        
         private void RandomizeTargetDirection(Vector3 currentDirection, Vector3 rotationAxis)
         {
             var randomAngle = Random.Range(-deviationAngle, deviationAngle);
-            
             targetDirection = Quaternion.AngleAxis(randomAngle, rotationAxis) * currentDirection;
         }
     }

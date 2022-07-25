@@ -5,8 +5,7 @@ namespace Steering
     public class AssignTarget : MonoBehaviour
     {
         [SerializeField] private Transform targetToMove;
-    
-        
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(1))

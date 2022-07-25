@@ -17,8 +17,7 @@ namespace Steering
         [SerializeField] private bool showGizmos;
         
         protected Vector3 debugTargetPosition;
-
-
+        
         public override SteeringOutput Steer(in Kinematic current, in Kinematic target, in SteeringThreshold threshold)
         {
             var linearTarget = target;
@@ -34,8 +33,7 @@ namespace Steering
 
             return new SteeringOutput(linearAcceleration, angularAcceleration);
         }
-
-
+        
         public void OnDrawGizmos()
         {
             if (!showGizmos) 

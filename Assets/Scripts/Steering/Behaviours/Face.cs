@@ -16,7 +16,6 @@ namespace Steering
             angularTarget.Forward = (target.Position - current.Position).normalized;
             
             var angularAcceleration = Steering.ReachOrientation(current, angularTarget, stoppingAngle, slowdownAngle, threshold);
-            
             return new SteeringOutput(null, angularAcceleration);
         }
     }

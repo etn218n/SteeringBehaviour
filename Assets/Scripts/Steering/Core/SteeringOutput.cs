@@ -13,8 +13,7 @@ namespace Steering
         public bool HasAngularAcceleration => angularAcceleration.HasValue;
         public Vector3 LinearAcceleration  => linearAcceleration.Value;
         public Vector3 AngularAcceleration => angularAcceleration.Value;
-
-
+        
         public SteeringOutput(Vector3? linearAcceleration, Vector3? angularAcceleration)
         {
             this.linearAcceleration  = linearAcceleration;

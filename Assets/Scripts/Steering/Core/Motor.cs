@@ -8,16 +8,12 @@ namespace Steering
     public class Motor : KinematicEntity
     {
         [SerializeField] private KinematicEntity targetEntity;
-        [Space]
         [SerializeField] private SteeringThreshold threshold;
-        [Space]
         [SerializeField] private List<SteeringBehaviour> steeringBehaviours;
 
         private Rigidbody rigidBody;
-        
 
         private void Awake() => rigidBody = GetComponent<Rigidbody>();
-
 
         private void FixedUpdate()
         {
@@ -26,7 +22,6 @@ namespace Steering
 
             Actuate(in current, in target, in threshold);
         }
-        
 
         private void Actuate(in Kinematic currentKinematic, in Kinematic targetKinematic, in SteeringThreshold threshold)
         {
@@ -57,22 +52,17 @@ namespace Steering
             rigidBody.velocity        = stopMoving  ? Vector3.zero : UpdateLinearVelocity(accumulatedLinearAcceleration, threshold);
         }
 
-        
         private Vector3 UpdateLinearVelocity(Vector3 linearAcceleration, SteeringThreshold threshold)
         {
             var updatedLinearVelocity = rigidBody.velocity + threshold.ClampLinearAcceleration(linearAcceleration) * Time.fixedDeltaTime;
-            
             return threshold.ClampVelocity(updatedLinearVelocity);
         }
-        
 
         private Vector3 UpdateAngularVelocity(Vector3 angularAcceleration, SteeringThreshold threshold)
         {
             var updatedAngularVelocity = rigidBody.angularVelocity + threshold.ClampAngularAcceleration(angularAcceleration) * Time.fixedDeltaTime;
-            
             return threshold.ClampRotation(updatedAngularVelocity);
         }
-        
 
         public override ref readonly Kinematic CurrentKinematic
         {
@@ -84,7 +74,6 @@ namespace Steering
                 currentKinematic.Orientation     =  rigidBody.rotation;
                 currentKinematic.LinearVelocity  =  rigidBody.velocity;
                 currentKinematic.AngularVelocity =  rigidBody.angularVelocity;
-                
                 return ref currentKinematic;
             }
         }
